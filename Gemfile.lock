@@ -84,6 +84,7 @@ GEM
     erubi (1.10.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
+    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.9.1)
@@ -182,6 +183,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   debug
   faker
+  foreman
   pry-rails
   puma (~> 5.0)
   rack-cors

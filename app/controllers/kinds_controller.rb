@@ -35,7 +35,8 @@ class KindsController < ApplicationController
 
   private
     def set_kind
-      @kind = Kind.find(params[:id])
+      return @kind = Kind.find(params[:id]) unless params[:contact_id]
+      @kind = Contact.find(params[:contact_id]).kind
     end
 
     def kind_params

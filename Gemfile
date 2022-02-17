@@ -7,7 +7,8 @@ gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "rack-cors"
-gem "active_model_serializers", "~> 0.10.0" 
+gem "active_model_serializers", "~> 0.10.0"
+gem "foreman"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

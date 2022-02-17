@@ -4,11 +4,11 @@ class ContactsController < ApplicationController
   def index
     @contacts = Contact.most_recent
 
-    render json: @contacts, include: [:kind]
+    render json: @contacts
   end
 
   def show
-    render json: @contact, include: [:kind]
+    render json: @contact
   end
 
   def create
@@ -39,13 +39,14 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params.require(:contact).permit(
-        :name, 
-        :email, 
-        :birthdate, 
-        :kind_id, 
-        phones_attributes: [:id, :number],
-        address_attributes: [:id, :street, :city]
-      )
+      # params.require(:contact).permit(
+      #   :name, 
+      #   :email, 
+      #   :birthdate, 
+      #   :kind_id, 
+      #   phones_attributes: [:id, :number],
+      #   address_attributes: [:id, :street, :city]
+      # )
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 end
