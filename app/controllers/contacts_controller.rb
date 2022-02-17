@@ -4,11 +4,11 @@ class ContactsController < ApplicationController
   def index
     @contacts = Contact.most_recent
 
-    render json: @contacts
+    render json: @contacts, include: [:kind]
   end
 
   def show
-    render json: @contact
+    render json: @contact, include: [:kind]
   end
 
   def create
