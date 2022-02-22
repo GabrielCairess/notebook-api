@@ -1,10 +1,12 @@
 class ContactsController < ApplicationController
+  include ErrorSerializer
   before_action :set_contact, only: %i[ show update destroy ]
 
   def index
-    @contacts = Contact.most_recent
+    @contacts = Contact.most_recent.page(params[:page])
 
-    render json: @contacts
+    # render json: @contacts
+    paginate json: @contacts ## quando quer usar a paginação da gem
   end
 
   def show
@@ -17,7 +19,8 @@ class ContactsController < ApplicationController
     if @contact.save
       render json: @contact, status: :created, location: @contact
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      # render json: @contact.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@contact.errors), status: :unprocessable_entity
     end
   end
 
@@ -25,7 +28,7 @@ class ContactsController < ApplicationController
     if @contact.update(contact_params)
       render json: @contact
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      render json: ErrorSerializer.serialize(@contact.errors), status: :unprocessable_entity
     end
   end
 
